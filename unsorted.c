@@ -83,4 +83,3 @@ static int findElement(SET *sp, char *elt)
     return (-1);
 }
 
-change
