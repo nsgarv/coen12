@@ -54,9 +54,13 @@ bool hasElement(SET *sp, char *elt)
 
 bool addElement(SET *sp, char *elt)
 {
-    if (hasElement(sp , elt) == false)
+    if (hasElement(sp , elt) == false){
         sp->elts[sp->count] = malloc(sizeof(char)*(strlen(elt) + 1));
-    strcpy(sp->elts[sp->count] , elt);
+        strcpy(sp->elts[sp->count] , elt);
+        sp->count++;
+        return true;
+        }
+    return false;
 }
 
 bool removeElement(SET *sp, char *elt)
@@ -78,3 +82,5 @@ static int findElement(SET *sp, char *elt)
         }
     return (-1);
 }
+
+change
