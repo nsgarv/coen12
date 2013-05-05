@@ -1,0 +1,43 @@
+unique
+------
+                                unsorted  sorted    hashing
+GreenEggsAndHam.txt             0m0.003s  0m0.003s  0m0.003s
+Macbeth.txt                     0m0.099s  0m0.016s  0m0.007s
+Genesis.txt                     0m0.105s  0m0.016s  0m0.009s
+HoundOfTheBaskervilles.txt      0m0.325s  0m0.039s  0m0.012s
+TheWarOfTheWorlds.txt           0m0.449s  0m0.050s  0m0.013s
+TreasureIsland.txt              0m0.388s  0m0.046s  0m0.013s
+TheSecretGarden.txt             0m0.353s  0m0.039s  0m0.014s
+TheCountOfMonteCristo.txt       0m4.661s  0m0.319s  0m0.067s
+TwentyThousandLeagues.txt       0m0.876s  0m0.081s  0m0.018s
+Bible.txt                       0m5.056s  0m0.319s  0m0.092s
+
+
+bincount
+--------
+                                unsorted  sorted    hashing
+GreenEggsAndHam.txt             0m0.003s  0m0.003s  0m0.004s
+Macbeth.txt                     0m0.020s  0m0.008s  0m0.008s
+Genesis.txt                     0m0.023s  0m0.010s  0m0.010s
+HoundOfTheBaskervilles.txt      0m0.050s  0m0.017s  0m0.012s
+TheWarOfTheWorlds.txt           0m0.063s  0m0.020s  0m0.013s
+TreasureIsland.txt              0m0.063s  0m0.020s  0m0.014s
+TheSecretGarden.txt             0m0.062s  0m0.021s  0m0.015s
+TheCountOfMonteCristo.txt       0m0.647s  0m0.129s  0m0.062s
+TwentyThousandLeagues.txt       0m0.117s  0m0.032s  0m0.018s
+Bible.txt                       0m0.799s  0m0.174s  0m0.096s
+
+
+parity
+------
+                              unsorted  sorted    hashing
+GreenEggsAndHam.txt           0m0.003s  0m0.003s  0m0.003s
+Macbeth.txt                   0m0.335s  0m0.052s  0m0.007s
+Genesis.txt                   0m0.002s  0m0.059s  0m0.011s
+HoundOfTheBaskervilles.txt    0m1.603s  0m0.207s  0m0.017s
+TheWarOfTheWorlds.txt         0m1.914s  0m0.243s  0m0.018s
+TreasureIsland.txt            0m1.951s  0m0.253s  0m0.019s
+TheSecretGarden.txt           0m1.802s  0m0.251s  0m0.021s
+TheCountOfMonteCristo.txt     0m36.190s 0m4.038s  0m0.155s
+TwentyThousandLeagues.txt     0m4.421s  0m0.512s  0m0.029s
+Bible.txt                     0m40.740s 0m3.933s  0m0.206s
