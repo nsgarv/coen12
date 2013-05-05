@@ -22,7 +22,7 @@ struct set {
  * Complexity:  O(1)
  *
  * Description: Return a pointer to a new set with a maximum capacity of
- *		MAXELTS.
+ *		maxElts.
  */
 SET *createSet(int maxElts)
 {
@@ -70,9 +70,10 @@ void destroySet(SET *sp)
 /*
  * Finction:   Hashfunction
  *
- * Complexity:  O()
+ * Complexity:  O(n) where n is the string length.
  *
- *
+ * Description: Retuns the index the character string hashes to.
+ * 		
  */
 unsigned hashString(char *s) {
          unsigned hash = 0;
@@ -84,10 +85,12 @@ unsigned hashString(char *s) {
 /*
  * Function:    findElement (private)
  *
- * Complexity:  O(log n)
+ * Complexity:  O(1) best case. O(n) worst case.
  *
- * Description: Use linear probing to check the state of flags array at the location
- *      ELT hashes to. If flags is empty, returns *FOUND is false. is present in the set SP.
+ * Description: Recieve initial hash location from hashString. 
+ *      Use linear probing to check the state of flags array at the location
+ *      elt hashes to. If flags is EMPTY, The element has never been contained in the array.
+ *      findElement returns *FOUND as false and location of the initial hash.
  *		If present, its location is returned and *FOUND is true.
  *		If not present, the location where it would be inserted is
  *		returned and *FOUND is false.
@@ -116,9 +119,10 @@ static int findElement(SET *sp, char *elt, bool *found)
 		    }
 		}
 		else if(sp->flags[locn] == DELETED){
-			if(avail == -1)
+			if(avail == -1){
 				avail = locn;
 			}
+		}
 
 	}
 	*found = false;
@@ -132,6 +136,7 @@ static int findElement(SET *sp, char *elt, bool *found)
  *
  * Description: Return the number of elements in the set pointed to by SP.
  */
+
 int numElements(SET *sp)
 {
 	assert(sp != NULL);
@@ -141,10 +146,11 @@ int numElements(SET *sp)
 /*
  * Function:    hasElement
  *
- * Complexity:  O(log n)
+ * Complexity:  O(1) best case. O(n) worst case.
  *
- * Description: Check if ELT is present in the set pointed to by SP.
+ * Description: Check if elt is present in the set by a call to findElement.
  */
+
 bool hasElement(SET *sp, char *elt)
 {
 	bool found;
@@ -154,23 +160,30 @@ bool hasElement(SET *sp, char *elt)
 /*
  * Function:    addElement
  *
- * Complexity:  O(n)
+ * Complexity:  O(1) best case. O(n) worst case.
  *
- * Description: Add ELT to the set pointed to by SP, and return whether the
- *		set changed.  A new element is inserted in its proper place
- *		to keep the array sorted by moving all higher-indexed
- *		element up.
+ * Description: Add elt to the set pointed to by SP, and return whether the
+ *		set changed. A new element is inserted in its proper hash position
+ *      found via findElement. If the number of elements in the set is Max_Unique,
+ *      the array is alreafy full and addElement does not make changes.
+ *
+ *      
  */
 bool addElement(SET *sp, char *elt)
-{
-	if (sp->count == Max_Unique)
-		return false;
+{	
 	bool found;
 	int locn = findElement(sp, elt, &found);
+
+	if (sp->count == Max_Unique)
+		return false;
+
 	if (found)
 		return false;
-	if(!found)
+
+	if(!found){
 		sp->elts[locn] = strdup(elt);
+	}
+
 	sp->flags[locn] = FILLED;
 	sp->count++;
 	return true;
@@ -178,11 +191,11 @@ bool addElement(SET *sp, char *elt)
 /*
  * Function:    removeElement
  *
- * Complexity:  O(n)
+ * Complexity:  O(1) bast case. O(n) worst case
  *
- * Description: Remove ELT from the set pointed to by SP, and return
- *		whether the set changed.  A element is deleted by moving
- *		all higher-indexed elements down.
+ * Description: Remove elt from the set by the location given be findElement.
+ * 		
+ *		
  */
 bool removeElement(SET *sp, char *elt)
 {
