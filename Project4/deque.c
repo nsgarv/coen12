@@ -7,6 +7,7 @@
  #include <stdio.h>
  #include <stdlib.h>
  #include <stdbool.h>
+ #include <assert.h>
  #include "deque.h"
 
 typedef struct deque DEQUE;
@@ -14,18 +15,18 @@ typedef struct node NODE;
 
 /*  Function: The structure for each node in LL DEQUE.
  *            The node points to next node and previous.
- *
+ *  NODE.
  */
 struct node{
 	int data;
 	NODE *next;
-	NODE *previous;
+	NODE *prev;
 };
 
 /*  Function: The structure for the list. It contains the struct node
  *  		  that make up the linked list, where each node points to 
  *            the next and previous.
- *
+ *  DEQUE.
  */
 struct deque{ 
 	int count;
@@ -54,7 +55,7 @@ extern int numItems(DEQUE *dp)
 {
 	int count = 0;
 	NODE *pcur;
-	pcur = phead;
+	pcur = dp->head;
 	while(pcur != NULL){
 		count ++;
 		pcur = pcur->next;
@@ -64,7 +65,7 @@ extern int numItems(DEQUE *dp)
 
 extern void addFirst(DEQUE *dp, int x)
 {
-
+	
 }
 
 extern void addLast(DEQUE *dp, int x)
@@ -84,11 +85,13 @@ extern int removeLast(DEQUE *dp)
 
 extern int getFirst(DEQUE *dp)
 {
-
+	assert(dp->count != 0);
+	return(dp->head->next);
 }
 
 extern int getLast(DEQUE *dp)
 {
-
+	assert(dp-count != 0);
+	return(dp->head->prev);
 }
 
