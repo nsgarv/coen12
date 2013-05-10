@@ -9,6 +9,10 @@
  #include <stdbool.h>
  #include <assert.h>
  #include "deque.h"
+ /*
+  *
+  *
+  */
 
 typedef struct deque DEQUE;
 typedef struct node NODE;
@@ -17,6 +21,7 @@ typedef struct node NODE;
  *            The node points to next node and previous.
  *  NODE.
  */
+
 struct node{
 	int data;
 	NODE *next;
@@ -45,12 +50,20 @@ DEQUE *createDeque(void){
 	return dp;
 }
 
+ /*
+  *
+  *
+  */
 
 extern void destroyDeque(DEQUE *dp)
 {
 
 }
 
+ /*
+  *
+  *
+  */
 extern int numItems(DEQUE *dp)
 {
 	int count = 0;
@@ -63,35 +76,81 @@ extern int numItems(DEQUE *dp)
 	return count;	
 }
 
+ /*
+  *
+  *
+  */
 extern void addFirst(DEQUE *dp, int x)
 {
+	NODE *pnew; 
+	NODE *pprev;
+	pnew = malloc(sizeof(NODE));
+	assert(pnew != NULL);
 	
+	pprev = dp->head->next;
+
+	pnew->data = x;
+	pnew->next = pprev;
+	pnew->prev = dp->head;
+
+	dp->head->next = pnew;
+	pprev->prev = pnew;
+	dp->count ++;
 }
 
+ /*
+  *
+  *
+  */
 extern void addLast(DEQUE *dp, int x)
 {
+	NODE *pnew;
+	NODE *pold;
+	
+	pnew = maloc(sizeof(NODE));
+	assert(pnew != NULL);
+	pold = dp->head->prev;
 
+	pnew->data = x;
+	pnew->next = dp->head;
+	pnew->prev = pold;
 }
 
+ /*
+  *
+  *
+  */
 extern int removeFirst(DEQUE *dp)
 {
 
 }
 
+ /*
+  *
+  *
+  */
 extern int removeLast(DEQUE *dp)
 {
 
 }
 
+ /*
+  *
+  *
+  */
 extern int getFirst(DEQUE *dp)
 {
 	assert(dp->count != 0);
-	return(dp->head->next);
+	return(dp->head->next->data);
 }
 
+ /*
+  *
+  *
+  */
 extern int getLast(DEQUE *dp)
 {
 	assert(dp-count != 0);
-	return(dp->head->prev);
+	return(dp->head->prev->data);
 }
 
