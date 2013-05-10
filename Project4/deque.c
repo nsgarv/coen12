@@ -4,25 +4,91 @@
  * Description:	This file contains the functions necessary to traverse maze
  * using linked list to store decisions
  */
+ #include <stdio.h>
+ #include <stdlib.h>
+ #include <stdbool.h>
+ #include "deque.h"
 
 typedef struct deque DEQUE;
+typedef struct node NODE;
 
-extern DEQUE *createDeque(void);
+/*  Function: The structure for each node in LL DEQUE.
+ *            The node points to next node and previous.
+ *
+ */
+struct node{
+	int data;
+	NODE *next;
+	NODE *previous;
+};
 
-extern void destroyDeque(DEQUE *dp);
+/*  Function: The structure for the list. It contains the struct node
+ *  		  that make up the linked list, where each node points to 
+ *            the next and previous.
+ *
+ */
+struct deque{ 
+	int count;
+	NODE *head;
+};
 
-extern int numItems(DEQUE *dp);
+DEQUE *createDeque(void){
+	DEQUE *dp;
+	dp = malloc(sizeof(DEQUE));
+	assert(dp != NULL);
+	dp->count = 0;
+	dp->head = malloc(sieof(NODE));
+	assert(dp->head != NULL);
+	dp->head->next = dp->head;
+	dp->head->prev = dp->head;
+	return dp;
+}
 
-extern void addFirst(DEQUE *dp, int x);
 
-extern void addLast(DEQUE *dp, int x);
+extern void destroyDeque(DEQUE *dp)
+{
 
-extern int removeFirst(DEQUE *dp);
+}
 
-extern int removeLast(DEQUE *dp);
+extern int numItems(DEQUE *dp)
+{
+	int count = 0;
+	NODE *pcur;
+	pcur = phead;
+	while(pcur != NULL){
+		count ++;
+		pcur = pcur->next;
+	}
+	return count;	
+}
 
-extern int getFirst(DEQUE *dp);
+extern void addFirst(DEQUE *dp, int x)
+{
 
-extern int getLast(DEQUE *dp);
+}
 
-# endif /* DEQUE_H */
+extern void addLast(DEQUE *dp, int x)
+{
+
+}
+
+extern int removeFirst(DEQUE *dp)
+{
+
+}
+
+extern int removeLast(DEQUE *dp)
+{
+
+}
+
+extern int getFirst(DEQUE *dp)
+{
+
+}
+
+extern int getLast(DEQUE *dp)
+{
+
+}
+
