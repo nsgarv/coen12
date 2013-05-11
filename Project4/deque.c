@@ -57,7 +57,17 @@ DEQUE *createDeque(void){
 
 extern void destroyDeque(DEQUE *dp)
 {
+	NODE *phead;
+	NODE *pcur;
+	NODE *pdel;
 
+	pcur = dp->head;
+ 	pdel = pcur->next;
+
+
+	while(pcur->next != phead){
+		free()
+	}
 }
 
  /*
@@ -70,7 +80,7 @@ extern int numItems(DEQUE *dp)
 	NODE *pcur;
 	pcur = dp->head;
 	while(pcur != NULL){
-		count ++;
+		count++;
 		pcur = pcur->next;
 	}
 	return count;	
@@ -95,7 +105,7 @@ extern void addFirst(DEQUE *dp, int x)
 
 	dp->head->next = pnew;
 	pprev->prev = pnew;
-	dp->count ++;
+	dp->count++;
 }
 
  /*
@@ -106,7 +116,7 @@ extern void addLast(DEQUE *dp, int x)
 {
 	NODE *pnew;
 	NODE *pold;
-	
+
 	pnew = maloc(sizeof(NODE));
 	assert(pnew != NULL);
 	pold = dp->head->prev;
@@ -114,6 +124,8 @@ extern void addLast(DEQUE *dp, int x)
 	pnew->data = x;
 	pnew->next = dp->head;
 	pnew->prev = pold;
+	pold->next = pnew;
+	dp->count++;
 }
 
  /*
@@ -122,7 +134,15 @@ extern void addLast(DEQUE *dp, int x)
   */
 extern int removeFirst(DEQUE *dp)
 {
-
+	NODE *phead;
+	phead = dp->head; //the head node
+	NODE *pdel;       //node after head we wish to delete
+	pdel = phead->next; //setting the node to be deleted as the node after phead
+	phead->next = pdel->next; /* node after the node after head is the new node after head.
+							   aka phead next now becomes what was previously the third node */
+	(pdel->next)->prev = phead;       //the node after the deleted node points back to head
+	free(pdel);
+	count--;
 }
 
  /*
@@ -131,7 +151,18 @@ extern int removeFirst(DEQUE *dp)
   */
 extern int removeLast(DEQUE *dp)
 {
+	NODE *phead;
+	NODE *nplast;
+	phead = dp->head;
+	NODE *pdel;
+	pdel = phead->prev; /*see above for algorithm concept. 
+						same except deleting from last instead of first. */
+	nplast = pdel->prev;
+	nplast->next = phead;
+	phead->prev = nplast;
 
+	free(pdel);
+	count--;
 }
 
  /*
