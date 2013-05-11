@@ -2,7 +2,7 @@
  * File:	deque.c
  *
  * Description:	This file contains the functions necessary to traverse maze
- * using linked list to store decisions
+ * 				using linked list to store decisions
  */
  #include <stdio.h>
  #include <stdlib.h>
@@ -14,7 +14,6 @@
   *
   */
 
-typedef struct deque DEQUE;
 typedef struct node NODE;
 
 /*  Function: The structure for each node in LL DEQUE.
@@ -43,7 +42,7 @@ DEQUE *createDeque(void){
 	dp = malloc(sizeof(DEQUE));
 	assert(dp != NULL);
 	dp->count = 0;
-	dp->head = malloc(sieof(NODE));
+	dp->head = malloc(sizeof(NODE));
 	assert(dp->head != NULL);
 	dp->head->next = dp->head;
 	dp->head->prev = dp->head;
@@ -64,9 +63,8 @@ extern void destroyDeque(DEQUE *dp)
 	pcur = dp->head;
  	pdel = pcur->next;
 
-
 	while(pcur->next != phead){
-		free()
+		free(pdel);
 	}
 }
 
@@ -76,6 +74,8 @@ extern void destroyDeque(DEQUE *dp)
   */
 extern int numItems(DEQUE *dp)
 {
+	return dp->count;
+	/*
 	int count = 0;
 	NODE *pcur;
 	pcur = dp->head;
@@ -84,6 +84,7 @@ extern int numItems(DEQUE *dp)
 		pcur = pcur->next;
 	}
 	return count;	
+	*/
 }
 
  /*
@@ -117,7 +118,7 @@ extern void addLast(DEQUE *dp, int x)
 	NODE *pnew;
 	NODE *pold;
 
-	pnew = maloc(sizeof(NODE));
+	pnew = malloc(sizeof(NODE));
 	assert(pnew != NULL);
 	pold = dp->head->prev;
 
@@ -134,15 +135,18 @@ extern void addLast(DEQUE *dp, int x)
   */
 extern int removeFirst(DEQUE *dp)
 {
+	int num;
 	NODE *phead;
 	phead = dp->head; //the head node
 	NODE *pdel;       //node after head we wish to delete
 	pdel = phead->next; //setting the node to be deleted as the node after phead
+	num = pdel->data;
 	phead->next = pdel->next; /* node after the node after head is the new node after head.
 							   aka phead next now becomes what was previously the third node */
 	(pdel->next)->prev = phead;       //the node after the deleted node points back to head
 	free(pdel);
-	count--;
+	dp->count--;
+	return num;
 }
 
  /*
@@ -151,18 +155,21 @@ extern int removeFirst(DEQUE *dp)
   */
 extern int removeLast(DEQUE *dp)
 {
+	int num;
 	NODE *phead;
 	NODE *nplast;
 	phead = dp->head;
 	NODE *pdel;
 	pdel = phead->prev; /*see above for algorithm concept. 
 						same except deleting from last instead of first. */
+	num = pdel->data;
 	nplast = pdel->prev;
 	nplast->next = phead;
 	phead->prev = nplast;
 
 	free(pdel);
-	count--;
+	dp->count--;
+	return num;
 }
 
  /*
@@ -181,7 +188,7 @@ extern int getFirst(DEQUE *dp)
   */
 extern int getLast(DEQUE *dp)
 {
-	assert(dp-count != 0);
+	assert(dp->count != 0);
 	return(dp->head->prev->data);
 }
 
