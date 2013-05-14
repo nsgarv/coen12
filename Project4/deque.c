@@ -6,7 +6,6 @@
  */
  #include <stdio.h>
  #include <stdlib.h>
- #include <stdbool.h>
  #include <assert.h>
  #include "deque.h"
  /*
@@ -98,15 +97,20 @@ extern void addFirst(DEQUE *dp, int x)
 	pnew = malloc(sizeof(NODE));
 	assert(pnew != NULL);
 	
-	pprev = dp->head->next;
+	if(dp->count == 0){
+		pprev = dp->head;
+		pnew->data = x;
+		pnew->next = pprev;
+		pnew->prev = dp->head;
+	}else{
+		pprev = dp->head;
+		pnew->data = x;
+		pnew->next = pprev->next;
+		dp->head->next = pnew;
+	}
 
-	pnew->data = x;
-	pnew->next = pprev;
-	pnew->prev = dp->head;
-
-	dp->head->next = pnew;
-	pprev->prev = pnew;
-	dp->count++;
+		dp->head->next = pnew;
+		dp->count++;
 }
 
  /*

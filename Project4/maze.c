@@ -368,7 +368,6 @@ int main(void)
     int x, y;
     WINDOW *win;
 
-
     win = initscr();
     curs_set(0);
     getmaxyx(win, y, x);
