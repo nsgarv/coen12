@@ -5,6 +5,6 @@ gcc -o maze maze.o deque.o -lcurses
 
 ./maze
 
-To sucessfully run the maze program, download maze.c, deque.c and compile.sh into a directory. from that directory run 
+To sucessfully run the maze program, download maze.c, deque.c, deque.h and compile.sh into a directory. from that directory run 
 $ sh compile.sh
 $ ./maze
