@@ -108,7 +108,8 @@ void addLast(DEQUE *dp, int x)
 
 	pnew->data = x;
 	pnew->next = dp->head;
-	pnew->prev = dp->head->prev->prev;
+	pnew->prev = dp->head->prev;
+	dp->head->prev->next = pnew;
 	dp->head->prev = pnew;
 	dp->count++;
 }
@@ -119,15 +120,16 @@ void addLast(DEQUE *dp, int x)
   */
 int removeFirst(DEQUE *dp)
 {
+	assert(dp != NULL);
 	int num;
-	NODE *phead;
-	phead = dp->head; //the head node
-	NODE *pdel;       //node after head we wish to delete
-	pdel = phead->next; //setting the node to be deleted as the node after phead
+	NODE *newnext;
+	NODE *pdel; 
+	pdel = dp->head->next; 
 	num = pdel->data;
-	phead->next = pdel->next; /* node after the node after head is the new node after head.
-							   aka phead next now becomes what was previously the third node */
-	(pdel->next)->prev = phead;       //the node after the deleted node points back to head
+	newnext = pdel->next;
+	dp->head->next = newnext;
+	newnext->prev = dp->head;
+	newnext->next = pdel->next->next;
 	free(pdel);
 	dp->count--;
 	return num;
@@ -139,17 +141,17 @@ int removeFirst(DEQUE *dp)
   */
 int removeLast(DEQUE *dp)
 {
+	assert(dp != NULL);
 	int num;
-	NODE *phead;
-	NODE *nplast;
-	phead = dp->head;
 	NODE *pdel;
-	pdel = phead->prev; /*see above for algorithm concept. 
+	NODE *newlast;
+	pdel = dp->head->prev; /*see above for algorithm concept. 
 						same except deleting from last instead of first. */
+	newlast = dp->head->prev->prev;
 	num = pdel->data;
-	nplast = pdel->prev;
-	nplast->next = phead;
-	phead->prev = nplast;
+	dp->head->prev = pdel->prev;
+	newlast->next = dp->head;
+	dp->head->prev = newlast;
 
 	free(pdel);
 	dp->count--;
@@ -162,7 +164,7 @@ int removeLast(DEQUE *dp)
   */
 int getFirst(DEQUE *dp)
 {
-	//assert(dp->count != 0);
+	assert(dp != NULL);
 	return(dp->head->next->data);
 }
 
@@ -172,7 +174,7 @@ int getFirst(DEQUE *dp)
   */
 int getLast(DEQUE *dp)
 {
-	//assert(dp->count != 0);
+	assert(dp != NULL);
 	return(dp->head->prev->data);
 }
 
