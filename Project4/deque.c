@@ -8,24 +8,22 @@
  #include <stdlib.h>
  #include <assert.h>
  #include "deque.h"
- /*
-  *
-  *
-  */
-
-typedef struct node NODE;
 
 /*  Function: The structure for each node in LL DEQUE.
  *            The node points to next node and previous.
  *  NODE.
  */
+typedef struct node NODE;
 
 struct node{
 	int data;
 	NODE *next;
 	NODE *prev;
 };
-
+ /*
+  *
+  *
+  */
 /*  Function: The structure for the list. It contains the struct node
  *  		  that make up the linked list, where each node points to 
  *            the next and previous.
@@ -53,83 +51,65 @@ DEQUE *createDeque(void){
   *
   */
 
-extern void destroyDeque(DEQUE *dp)
+void destroyDeque(DEQUE *dp)
 {
-	NODE *phead;
-	NODE *pcur;
+	assert(dp != NULL);
 	NODE *pdel;
 
-	pcur = dp->head;
- 	pdel = pcur->next;
-
-	while(pcur->next != phead){
-		free(pdel);
+	int i;
+	for(i=0; i<dp->count; i++)
+	{
+			pdel = dp->head->next;
+			dp->head->next = pdel->next;
+			//dp->count--;
+			free(pdel);
+		}
+		return;
 	}
-}
-
  /*
   *
   *
   */
-extern int numItems(DEQUE *dp)
+int numItems(DEQUE *dp)
 {
 	return dp->count;
-	/*
-	int count = 0;
-	NODE *pcur;
-	pcur = dp->head;
-	while(pcur != NULL){
-		count++;
-		pcur = pcur->next;
-	}
-	return count;	
-	*/
 }
 
  /*
   *
   *
   */
-extern void addFirst(DEQUE *dp, int x)
+void addFirst(DEQUE *dp, int x)
 {
+	assert(dp != NULL);
 	NODE *pnew; 
-	NODE *pprev;
 	pnew = malloc(sizeof(NODE));
 	assert(pnew != NULL);
-	
-	if(dp->count == 0){
-		pprev = dp->head;
-		pnew->data = x;
-		pnew->next = pprev;
-		pnew->prev = dp->head;
-	}else{
-		pprev = dp->head;
-		pnew->data = x;
-		pnew->next = pprev->next;
-		dp->head->next = pnew;
-	}
 
-		dp->head->next = pnew;
-		dp->count++;
+	pnew->data = x;
+	pnew->prev = dp->head;
+	pnew->next = dp->head->next;
+	dp->head->next->prev = pnew;
+	dp->head->next = pnew;
+	dp->count++;
+	return;
 }
 
  /*
   *
   *
   */
-extern void addLast(DEQUE *dp, int x)
+void addLast(DEQUE *dp, int x)
 {
+	assert(dp != NULL);
 	NODE *pnew;
-	NODE *pold;
-
 	pnew = malloc(sizeof(NODE));
 	assert(pnew != NULL);
-	pold = dp->head->prev;
 
 	pnew->data = x;
 	pnew->next = dp->head;
-	pnew->prev = pold;
-	pold->next = pnew;
+	pnew->prev = dp->head->prev->prev;
+	dp->head->prev = pnew;
 	dp->count++;
 }
 
@@ -137,7 +117,7 @@ extern void addLast(DEQUE *dp, int x)
   *
   *
   */
-extern int removeFirst(DEQUE *dp)
+int removeFirst(DEQUE *dp)
 {
 	int num;
 	NODE *phead;
@@ -157,7 +137,7 @@ extern int removeFirst(DEQUE *dp)
   *
   *
   */
-extern int removeLast(DEQUE *dp)
+int removeLast(DEQUE *dp)
 {
 	int num;
 	NODE *phead;
@@ -180,9 +160,9 @@ extern int removeLast(DEQUE *dp)
   *
   *
   */
-extern int getFirst(DEQUE *dp)
+int getFirst(DEQUE *dp)
 {
-	assert(dp->count != 0);
+	//assert(dp->count != 0);
 	return(dp->head->next->data);
 }
 
@@ -190,9 +170,9 @@ extern int getFirst(DEQUE *dp)
   *
   *
   */
-extern int getLast(DEQUE *dp)
+int getLast(DEQUE *dp)
 {
-	assert(dp->count != 0);
+	//assert(dp->count != 0);
 	return(dp->head->prev->data);
 }
 
