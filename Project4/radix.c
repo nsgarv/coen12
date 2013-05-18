@@ -31,15 +31,19 @@ int main(void)
 	numDigits = ceil((log(n+1)/log(10)));
 	printf("numDigits is %d\n", numDigits);
 //printf("---testprint---");
-	for(k=0; k<=numDigits; k++)
+	for(k=0; k<(numDigits+1); k++)
 	{
-		while(numItems(list) != 0){
+		printf("--testprint\n")
+		printf("k is %d\n", k);
+		for(i=numItems(list); i<0; i--){
+		//while(numItems(list) != 0){
 			num = removeFirst(list);
-			printf("num is %d\n", num);
 			j = (int)(num/pow(10,k))%10;         /* j is the bucket index */
 			printf("bucket index is %d\n", j);
+			printf("num is %d\n", num);
 			addLast(bucket[j], num);
 		}	
+		i = 0;
 		while(i <= count){
 			for(f=0; f < r; f++){
 				while(numItems(bucket[f]) != 0){

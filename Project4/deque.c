@@ -50,7 +50,6 @@ DEQUE *createDeque(void){
   *
   *
   */
-
 void destroyDeque(DEQUE *dp)
 {
 	assert(dp != NULL);
@@ -61,7 +60,6 @@ void destroyDeque(DEQUE *dp)
 	{
 			pdel = dp->head->next;
 			dp->head->next = pdel->next;
-			//dp->count--;
 			free(pdel);
 		}
 		return;
@@ -145,8 +143,7 @@ int removeLast(DEQUE *dp)
 	int num;
 	NODE *pdel;
 	NODE *newlast;
-	pdel = dp->head->prev; /*see above for algorithm concept. 
-						same except deleting from last instead of first. */
+	pdel = dp->head->prev;
 	newlast = dp->head->prev->prev;
 	num = pdel->data;
 	dp->head->prev = pdel->prev;
