@@ -27,20 +27,21 @@ int main(void)
 		addLast(list, x);
 	}
 	count = numItems(list);
-	printf("count is %d\n", count);
+	//printf("count is %d\n", count);
 	numDigits = ceil((log(n+1)/log(10)));
-	printf("numDigits is %d\n", numDigits);
-//printf("---testprint---");
+	//printf("numDigits is %d\n", numDigits);
+	//printf("---testprint---");
+
 	for(k=0; k<(numDigits+1); k++)
 	{
-		printf("--testprint\n")
-		printf("k is %d\n", k);
-		for(i=numItems(list); i<0; i--){
-		//while(numItems(list) != 0){
+		//printf("--testprint\n");
+		//printf("k is %d\n", k);
+		//for(i=numItems(list); i<0; i--){
+		while(numItems(list) != 0){
 			num = removeFirst(list);
 			j = (int)(num/pow(10,k))%10;         /* j is the bucket index */
-			printf("bucket index is %d\n", j);
-			printf("num is %d\n", num);
+			//printf("num is %d\n", num);
+			//printf("bucket index is %d\n", j);
 			addLast(bucket[j], num);
 		}	
 		i = 0;
@@ -48,7 +49,7 @@ int main(void)
 			for(f=0; f < r; f++){
 				while(numItems(bucket[f]) != 0){
 					num = removeFirst(bucket[f]);
-					printf("num2 is %d\n", num);
+					//printf("num2 is %d\n", num);
 					addLast(list,num);
 				}
 			}
@@ -57,8 +58,8 @@ int main(void)
 	}
 	printf("number of items in the list is %d\n", numItems(list));
 	l = 0;
-	while(l <= numItems(list)){
-		num = removeLast(list);
+	while(numItems(list) != 0){
+		num = removeFirst(list);
 		printf("%d\n", num);
 		l++;
 	}
