@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <assert.h>
+#include "tree.h"
 /*
  * Funtion:	
  *
@@ -13,22 +15,35 @@ typedef struct tree TREE;
 struct tree{
 	int data;
 	TREE *parent;
-	TREE *left;
-	TREE *right;
+	TREE *leftChild;
+	TREE *rightChild;
 };
 
 
-struct tree *createTree(int data, TREE *left, TREE *right){
+TREE *createTree(int data, TREE *left, TREE *right)
+{
 	TREE *root;
 	root = malloc(sizeof(TREE));
 	assert(root != NULL);
-	root->count = 0;
-	root->right = malloc(sizeof(TREE));
-	assert(root->right != NULL);
-	root->left = malloc(sizeof(TREE));
-	assert(root->left != NULL);
-	dp->head->next = dp->head;
-	dp->head->prev = dp->head;
+	root->data = data;
+	root->rightChild = malloc(sizeof(TREE));
+	assert(root->rightChild != NULL);
+	root->leftChild = malloc(sizeof(TREE));
+	assert(root->leftChild != NULL);
+
+	if (left->parent != NULL){
+		if(left->data < data)
+			root->leftChild = left;
+		else if(left->data > data)
+			root->rightChild = left;
+	}
+	if (right->parent != NULL){
+		if(right->data < data)
+			root->leftChild = right;
+		else if(right->data > data)
+			root->rightChild = left;
+	}
+
 	return root;
 }
 /*
@@ -39,8 +54,13 @@ struct tree *createTree(int data, TREE *left, TREE *right){
  * Description:	
  *
  */
-void destroyTree(struct tree *root){
-
+void destroyTree(TREE *root)
+{
+	if(root == NULL)
+		return;
+	destroyTree(root->leftChild);
+	destroyTree(root->rightChild);
+	free(root);
 }
 /*
  * Funtion:	
@@ -50,8 +70,10 @@ void destroyTree(struct tree *root){
  * Description:	
  *
  */
-int getData(struct tree *root){
-
+int getData(TREE *root)
+{
+	assert(root != NULL);
+	return root->data;
 }
 /*
  * Funtion:	
@@ -61,8 +83,10 @@ int getData(struct tree *root){
  * Description:	
  *
  */
-struct tree *getLeft(struct tree *root){
-
+TREE *getLeft(TREE *root)
+{
+	assert(root != NULL);
+	return root->leftChild;	
 }
 /*
  * Funtion:	
@@ -72,8 +96,10 @@ struct tree *getLeft(struct tree *root){
  * Description:	
  *
  */
-struct tree *getRight(struct tree *root){
-
+TREE *getRight(TREE *root)
+{
+	assert(root != NULL);
+	return root->rightChild;
 }
 /*
  * Funtion:	
@@ -83,8 +109,10 @@ struct tree *getRight(struct tree *root){
  * Description:	
  *
  */
-struct tree *getParent(struct tree *root){
-
+TREE *getParent(TREE *root)
+{
+	assert(root != NULL);
+	return root->parent;
 }
 /*
  * Funtion:	
@@ -94,8 +122,10 @@ struct tree *getParent(struct tree *root){
  * Description:	
  *
  */
-void setLeft(struct tree *root, struct tree *left){
-
+void setLeft(TREE *root, TREE *left)
+{
+	assert(root != NULL);
+	root->leftChild = left;
 }
 /*
  * Funtion:	
@@ -105,6 +135,8 @@ void setLeft(struct tree *root, struct tree *left){
  * Description:	
  *
  */
-void setRight(struct tree *root, struct tree *right){
-
+void setRight(TREE *root, TREE *right)
+{
+	assert(root != NULL);
+	root->rightChild = right;
 }
