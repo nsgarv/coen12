@@ -19,31 +19,47 @@ struct tree{
 	TREE *rightChild;
 };
 
-
+/*
+ * Funtion:	
+ *
+ * Complexity:
+ *
+ * Description:	
+ *
+ */
 TREE *createTree(int data, TREE *left, TREE *right)
 {
 	TREE *root;
 	root = malloc(sizeof(TREE));
 	assert(root != NULL);
 	root->data = data;
-	root->rightChild = malloc(sizeof(TREE));
+
+	/*root->rightChild = malloc(sizeof(TREE));
 	assert(root->rightChild != NULL);
+
 	root->leftChild = malloc(sizeof(TREE));
-	assert(root->leftChild != NULL);
+	assert(root->leftChild != NULL);*/
 
-	if (left->parent != NULL){
-		if(left->data < data)
-			root->leftChild = left;
-		else if(left->data > data)
-			root->rightChild = left;
+	root->leftChild = left;
+	if (left != NULL){
+		if (left->parent != NULL){
+			if (left->parent->leftChild == left)
+				left->parent->leftChild = NULL;
+			if (left->parent->rightChild == left)
+				left->parent->rightChild = NULL;
+			left->parent = root;
+		}
 	}
-	if (right->parent != NULL){
-		if(right->data < data)
-			root->leftChild = right;
-		else if(right->data > data)
-			root->rightChild = left;
+	root->rightChild = right;
+	if (right != NULL){
+		if (right->parent != NULL){
+			if (right->parent->leftChild == right)
+				right->parent->leftChild = NULL;
+			if (right->parent->rightChild == right)
+				right->parent->rightChild = NULL;
+			right->parent = root;
+		}
 	}
-
 	return root;
 }
 /*
