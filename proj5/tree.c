@@ -2,13 +2,15 @@
 #include <stdlib.h>
 #include <assert.h>
 #include "tree.h"
+
 /*
- * Funtion:	
+ * Funtion:	struct TREE
  *
- * Complexity:
+ * Complexity: O(1) 
  *
- * Description:	
- *
+ * Description:	the data structure for root/leaf/node.
+ *				It contains pointers to the parent, 
+ *				left and right children and a data value.
  */
 typedef struct tree TREE;
 
@@ -20,12 +22,12 @@ struct tree{
 };
 
 /*
- * Funtion:	
+ * Funtion:	CreateTree
  *
- * Complexity:
+ * Complexity: O(1)
  *
- * Description:	
- *
+ * Description:	Creates a root and allocates memory for a structure of type tree
+ * 				and determines if it is the left or right child of its parent.
  */
 TREE *createTree(int data, TREE *left, TREE *right)
 {
@@ -33,12 +35,6 @@ TREE *createTree(int data, TREE *left, TREE *right)
 	root = malloc(sizeof(TREE));
 	assert(root != NULL);
 	root->data = data;
-
-	/*root->rightChild = malloc(sizeof(TREE));
-	assert(root->rightChild != NULL);
-
-	root->leftChild = malloc(sizeof(TREE));
-	assert(root->leftChild != NULL);*/
 
 	root->leftChild = left;
 	if (left != NULL){
@@ -63,11 +59,12 @@ TREE *createTree(int data, TREE *left, TREE *right)
 	return root;
 }
 /*
- * Funtion:	
+ * Funtion:	DestoryTree
  *
- * Complexity:
+ * Complexity: O(n)
  *
- * Description:	
+ * Description:	Preforms a post order traversal of the root and deallocates 
+ *				memory for each node until it frees the root.
  *
  */
 void destroyTree(TREE *root)
@@ -79,11 +76,12 @@ void destroyTree(TREE *root)
 	free(root);
 }
 /*
- * Funtion:	
+ * Funtion:	getData
  *
- * Complexity:
+ * Complexity: O(1)
  *
- * Description:	
+ * Description:	getData simply recieves a root and returns 
+ *				the data field in struct tree
  *
  */
 int getData(TREE *root)
@@ -92,11 +90,11 @@ int getData(TREE *root)
 	return root->data;
 }
 /*
- * Funtion:	
+ * Funtion:	getLeft
  *
- * Complexity:
+ * Complexity: O(1)
  *
- * Description:	
+ * Description:	Returns the leftChild field of TREE
  *
  */
 TREE *getLeft(TREE *root)
@@ -105,11 +103,11 @@ TREE *getLeft(TREE *root)
 	return root->leftChild;	
 }
 /*
- * Funtion:	
+ * Funtion:	getRight
  *
- * Complexity:
+ * Complexity: O(1)
  *
- * Description:	
+ * Description:	Returns the rightChild fild of TREE
  *
  */
 TREE *getRight(TREE *root)
@@ -118,11 +116,11 @@ TREE *getRight(TREE *root)
 	return root->rightChild;
 }
 /*
- * Funtion:	
+ * Funtion:	getParent
  *
- * Complexity:
+ * Complexity: O(1)
  *
- * Description:	
+ * Description:	Returns Parent field of TREE
  *
  */
 TREE *getParent(TREE *root)
@@ -131,11 +129,11 @@ TREE *getParent(TREE *root)
 	return root->parent;
 }
 /*
- * Funtion:	
+ * Funtion:	setLeft
  *
- * Complexity:
+ * Complexity: O(1)
  *
- * Description:	
+ * Description:	Adds a left child to the root passed in
  *
  */
 void setLeft(TREE *root, TREE *left)
@@ -144,11 +142,11 @@ void setLeft(TREE *root, TREE *left)
 	root->leftChild = left;
 }
 /*
- * Funtion:	
+ * Funtion:	setRight
  *
- * Complexity:
+ * Complexity: O(1)
  *
- * Description:	
+ * Description:	Adds a right child to the root passed in 
  *
  */
 void setRight(TREE *root, TREE *right)
