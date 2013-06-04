@@ -9,3 +9,12 @@ $ gunzip output.txt.z
 
 tar -cvf project5.tar "name of file1" "name of file2"
 
+gcc huf.c pack.c tree.c
+./a.out input.txt output.txt.z
+gunzip output.txt.z
+cmp input.txt output.txt
+cmp is compare
+if they are 100% the same, then nothing returns
+makesure output and input is not the same name
+if you do input.txt and input.txt.z
+gunzip input.txt.z will return input.txt
