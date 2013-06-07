@@ -2,26 +2,26 @@
 # define DEQUE_H
 
 typedef struct node NODE;
-typedef class deque DEQUE;
+
 struct node {
     int data;
-    struct node *next;
-    struct node *prev;
+    NODE *next;
+    NODE *prev;
 };
 
-class deque{
+class Deque{
 	int count;
 	class node *head;
 public:
-	Deque::Deque(); 
-	Deque::~Deque(); 
-	int Deque::size();
-	void Deque::addFirst(int x); 
-	void Deque::addLast(int x); 
-	int Deque::removeFirst();
-	int Deque::removeLast();
-	int Deque::getFirst();
-	int Deque::getLast();
+	Deque(); 
+	~Deque(); 
+	int size();
+	void addFirst(int x); 
+	void addLast(int x); 
+	int removeFirst();
+	int removeLast();
+	int getFirst();
+	int getLast();
 };
 
 # endif /* DEQUE_H */

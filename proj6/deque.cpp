@@ -1,53 +1,41 @@
-# include <stdio.h>
-# include <stdlib.h>
-# include <assert.h>
+# include <iostream>
 # include "deque.h"
 
-DEQUE *createDeque(void)
+Deque::Deque()
 {
-    struct deque *dp;
 
     count = 0;
-    head = malloc(sizeof(struct node));
-    assert(dp->head != NULL);
+    head = new NODE;
 
-    dp->head->next = dp->head;
-    dp->head->prev = dp->head;
+    head->next = head;
+    head->prev = head;
 
-    return dp;
 }
 
 
-void destroyDeque(struct deque *dp)
+Deque::~Deque()
 {
-    struct node *np, *next;
+    NODE *np, *next;
 
-
-    assert(dp != NULL);
     np = dp->head;
 
     do {
 	next = np->next;
-	free(np);
+	delete[] np;
 	np = next;
     } while (np != dp->head);
 
-    free(dp);
+    delete[] dp;
 }
 
 
-void addFirst(struct deque *dp, int x)
+void Deque::addFirst(int x)
 {
-    struct node *np, *sentinel;
-
-
-    assert(dp != NULL);
-    np = malloc(sizeof(struct node));
-    assert(np != NULL);
+    NODE *np, *sentinel;
     np->data = x;
 
-    dp->count ++;
-    sentinel = dp->head;
+    count ++;
+    sentinel = head;
 
     np->prev = sentinel;
     np->next = sentinel->next;
@@ -57,14 +45,11 @@ void addFirst(struct deque *dp, int x)
 }
 
 
-void addLast(struct deque *dp, int x)
+void Deque::addLast(int x)
 {
-    struct node *np, *sentinel;
+    NODE *np, *sentinel;
 
-
-    assert(dp != NULL);
-    np = malloc(sizeof(struct node));
-    assert(np != NULL);
+    np = new NODE;
     np->data = x;
 
     sentinel = dp->head;
@@ -78,61 +63,60 @@ void addLast(struct deque *dp, int x)
 }
 
 
-int removeFirst(struct deque *dp)
+int Deque::removeFirst()
 {
     int x;
     struct node *np, *sentinel;
 
 
-    assert(dp != NULL && dp->count > 0);
-    sentinel = dp->head;
-    dp->count --;
+    assert(!NULL && dp->count > 0);
+    sentinel = head;
+    count --;
 
     np = sentinel->next;
     sentinel->next = np->next;
     np->next->prev = sentinel;
 
     x = np->data;
-    free(np);
+    delete[] np;
     return x;
 }
 
 
-int removeLast(struct deque *dp)
+int Deque::removeLast()
 {
     int x;
-    struct node *np, *sentinel;
+    NODE *np, *sentinel;
 
-
-    assert(dp != NULL && dp->count > 0);
-    sentinel = dp->head;
-    dp->count --;
+    assert(!NULL && count > 0);
+    sentinel = head;
+    count --;
 
     np = sentinel->prev;
     sentinel->prev = np->prev;
     np->prev->next = sentinel;
 
     x = np->data;
-    free(np);
+    delete[] np;
     return x;
 }
 
 
-int getFirst(struct deque *dp)
+int Deque::getFirst()
 {
-    assert(dp != NULL && dp->count > 0);
-    return dp->head->next->data;
+
+    return head->next->data;
 }
 
 
-int getLast(struct deque *dp)
+int Deque::getLast()
 {
-    assert(dp != NULL && dp->count > 0);
-    return dp->head->prev->data;
+
+    return head->prev->data;
 }
 
 
-int numItems(struct deque *dp)
+int Deque::size()
 {
-    return dp->count;
+    return count;
 }
