@@ -1,9 +1,3 @@
-/*
- * File:    deque.cpp
- *
- * Description: This file contains the functions necessary to traverse maze 
- *              and radix sort
- */
 # include <cassert>
 # include "deque.h"
 
@@ -14,24 +8,19 @@ struct node {
     NODE *next;
     NODE *prev;
 };
- /*  Function: Constructor. Allocates memory for a new node
-  *
-  *  Complexity: O(1)
-  */
+
 Deque::Deque()
 {
+
     count = 0;
     head = new NODE;
 
     head->next = head;
     head->prev = head;
+
 }
 
- /*  Function: destructor Deallocates memory for every node in the list. 
-  *            The function must act on every element in the list.
-  *
-  *  Complexity: O(n).
-  */
+
 Deque::~Deque()
 {
     NODE *np, *next;
@@ -46,10 +35,7 @@ Deque::~Deque()
 
 }
 
- /* Function: Adds a new node after the head node.
-  *
-  * Complexity: O(1)
-  */
+
 void Deque::addFirst(int x)
 {
     NODE *np = new NODE; 
@@ -66,11 +52,7 @@ void Deque::addFirst(int x)
     sentinel->next = np;
 }
 
- /* Function: Adds a new node to the end of the list. Since the list is circular,
-  *           the last node is accesed by the nide befre the head.
-  *
-  * Complexity: O(1)
-  */
+
 void Deque::addLast(int x)
 {
     NODE *np = new NODE;
@@ -89,14 +71,12 @@ void Deque::addLast(int x)
     sentinel->prev = np;
 }
 
- /* Function: returns the vaue of the first node and deallocates memory.
-  *
-  * Complexity: O(1)
-  */
+
 int Deque::removeFirst()
 {
     int x;
     struct node *np, *sentinel;
+
 
     assert(!NULL && count > 0);
     sentinel = head;
@@ -111,10 +91,7 @@ int Deque::removeFirst()
     return x;
 }
 
- /* Function: Returns the value of the last node and deallocates memory.
-  *
-  * Complexity: O(1)
-  */
+
 int Deque::removeLast()
 {
     int x;
@@ -133,30 +110,21 @@ int Deque::removeLast()
     return x;
 }
 
- /* Function: Returns the value at the first node after the head.
-  *
-  * Complexity: O(1)
-  */
+
 int Deque::getFirst()
 {
+
     return head->next->data;
 }
 
- /* Function: Returns the value at the last node.
-  *
-  * Complexity: O(1)
-  */
+
 int Deque::getLast()
 {
+
     return head->prev->data;
 }
 
- /* Function: Returns the number or items in the list. 
-  *           This value is incrimented when elements are 
-  *           added or removed and stored in the head node.
-  *
-  * Complexity: O(1)
-  */
+
 int Deque::size()
 {
     return count;

@@ -1,11 +1,22 @@
+
+%%Contained in compilemaze.sh
+%%to run the maze. simply type $ sh compilemaze.sh
+%%                             $ ./maze
+
 g++ -c -o maze.o maze.cpp
 g++ -c -o deque.o deque.cpp
 g++ -o maze deque.o maze.o -lcurses
 
 ./maze
 
+%% radix is a sorting algorithm. it takes in numbers and sorts them in decreasing order
+%% just run $ sh compileradix.sh
+            $ ./radix
+%%then enter numbers one at a time and hit return after each number. character to start the sort
 
 g++ -c -o radix.o radix.cpp
 g++ -o radix radix.o deque.o -lcurses
 
 ./radix
+
+tar -cvf 
